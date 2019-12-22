@@ -25,26 +25,9 @@ class ViewController: NSViewController {
 
         setupTextFields()
 
-        // TO DO
-        // перестраивать фигуры при перемене параметров филдов и по кнопке
-
         drawingView.wantsLayer = true
         drawingView.layer?.borderColor = .black
         drawingView.layer?.borderWidth = 0.5
-    }
-
-    override func viewDidAppear() {
-        super.viewDidAppear()
-
-        drawingView.firstCircle = Circle(center: NSPoint(x: Double(firstCircleCenterXTextField.stringValue) ?? 0,
-                                                         y: Double(firstCircleCenterYTextField.stringValue) ?? 0),
-                                         radius: Double(firstCircleRadiusTextField.stringValue) ?? 0)
-
-        drawingView.secondCircle = Circle(center: NSPoint(x: Double(secondCircleCenterXTextField.stringValue) ?? 0,
-                                                          y: Double(secondCircleCenterYTextField.stringValue) ?? 0),
-                                          radius: Double(secondCircleRadiusTextField.stringValue) ?? 0)
-
-        drawingView.arcRadius = Double(arcRadiusTextField.stringValue) ?? 0
     }
 
     func setupTextFields() {
@@ -60,12 +43,25 @@ class ViewController: NSViewController {
     }
 
     @IBAction func createArcButtonTap(_ sender: NSButton) {
+        drawingView.firstCircle = Circle(center: NSPoint(x: Double(firstCircleCenterXTextField.stringValue) ?? 0,
+                                                         y: Double(firstCircleCenterYTextField.stringValue) ?? 0),
+                                         radius: Double(firstCircleRadiusTextField.stringValue) ?? 0)
+
+        drawingView.secondCircle = Circle(center: NSPoint(x: Double(secondCircleCenterXTextField.stringValue) ?? 0,
+                                                          y: Double(secondCircleCenterYTextField.stringValue) ?? 0),
+                                          radius: Double(secondCircleRadiusTextField.stringValue) ?? 0)
+
+        drawingView.arcRadius = Double(arcRadiusTextField.stringValue) ?? 0
+
+        drawingView.isDrawing = true
+        drawingView.setNeedsDisplay(drawingView.bounds)
         arcTitleLabel.stringValue = "Касательная дуга"
-        arcCenterLabel.stringValue = "Центр дуги (X, Y)"
+        arcCenterLabel.stringValue = "Центр дуги: (X, Y)"
         touchPointsLabel.stringValue = "Точки касания:\nА (X, Y), В (X, Y)"
     }
 
     @IBAction func clearButtonTap(_ sender: NSButton) {
-        // clear drawing field
+        drawingView.isDrawing = false
+        drawingView.setNeedsDisplay(drawingView.bounds)
     }
 }
