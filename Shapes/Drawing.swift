@@ -8,7 +8,7 @@ class Drawing: NSView {
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
 
-        guard let firstCircle = firstCircle, let secondCircle = secondCircle else {
+        guard let firstCircle = firstCircle, let secondCircle = secondCircle, let arcRadius = arcRadius else {
             return
         }
 
@@ -16,17 +16,18 @@ class Drawing: NSView {
         draw(secondCircle, strokeColor: .black, lineWidth: 2)
 
         drawAssistantCircles(touchType: .outer)
-        draw(findAssistantCirclesIntersection(), strokeColor: .brown)
+        draw(findAssistantCirclesIntersection(), strokeColor: .systemGreen)
+        drawArc(center: findAssistantCirclesIntersection(), radius: arcRadius)
     }
 
     func draw(_ point: NSPoint, strokeColor: NSColor) {
-        let rect = NSRect(x: Double(point.x) - 2,
-                          y: Double(point.y) - 2,
-                          width: 4,
-                          height: 4)
+        let rect = NSRect(x: Double(point.x) - 1,
+                          y: Double(point.y) - 1,
+                          width: 2,
+                          height: 2)
         let path = NSBezierPath(ovalIn: rect)
         strokeColor.setStroke()
-        path.lineWidth = 4
+        path.lineWidth = 2
         path.stroke()
     }
 
@@ -63,8 +64,8 @@ class Drawing: NSView {
             secondRadius = arcRadius - secondCircle.radius
         }
 
-        draw(Circle(center: firstCircle.center, radius: firstRadius), strokeColor: .red, lineWidth: 1)
-        draw(Circle(center: secondCircle.center, radius: secondRadius), strokeColor: .red, lineWidth: 1)
+        draw(Circle(center: firstCircle.center, radius: firstRadius), strokeColor: .red, lineWidth: 0.1)
+        draw(Circle(center: secondCircle.center, radius: secondRadius), strokeColor: .red, lineWidth: 0.1)
     }
 
     func findAssistantCirclesIntersection() -> NSPoint {
@@ -106,7 +107,7 @@ class Drawing: NSView {
         return NSPoint(x: p4x, y: p4y)
     }
 
-    func drawArc() {
-        
+    func drawArc(center: NSPoint, radius: Double) {
+        draw(Circle(center: center, radius: radius), strokeColor: .systemGreen, lineWidth: 1)
     }
 }
