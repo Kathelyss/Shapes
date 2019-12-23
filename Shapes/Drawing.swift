@@ -48,7 +48,9 @@ class Drawing: NSView {
             print("Error: \(error)")
         }
     }
-
+}
+private extension Drawing {
+    
     func draw(_ point: NSPoint, strokeColor: NSColor) {
         let rect = NSRect(x: Double(point.x) - 1, y: Double(point.y) - 1, width: 2, height: 2)
         let path = NSBezierPath(ovalIn: rect)
