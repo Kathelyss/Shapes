@@ -10,6 +10,7 @@
 		2380581423AFDEC800CA302E /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2380581323AFDEC800CA302E /* Circle.swift */; };
 		2380581623AFDEE900CA302E /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2380581523AFDEE900CA302E /* Drawing.swift */; };
 		2380581823AFDF0A00CA302E /* TouchType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2380581723AFDF0A00CA302E /* TouchType.swift */; };
+		23C3036F23B03A3100C95750 /* DrawingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3036E23B03A3100C95750 /* DrawingError.swift */; };
 		23E2B25C237207920067C048 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E2B25B237207920067C048 /* AppDelegate.swift */; };
 		23E2B25E237207920067C048 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E2B25D237207920067C048 /* ViewController.swift */; };
 		23E2B260237207940067C048 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23E2B25F237207940067C048 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 		2380581323AFDEC800CA302E /* Circle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
 		2380581523AFDEE900CA302E /* Drawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
 		2380581723AFDF0A00CA302E /* TouchType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchType.swift; sourceTree = "<group>"; };
+		23C3036E23B03A3100C95750 /* DrawingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingError.swift; sourceTree = "<group>"; };
 		23E2B258237207920067C048 /* Shapes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shapes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23E2B25B237207920067C048 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		23E2B25D237207920067C048 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				23E2B25D237207920067C048 /* ViewController.swift */,
 				2380581323AFDEC800CA302E /* Circle.swift */,
 				2380581523AFDEE900CA302E /* Drawing.swift */,
+				23C3036E23B03A3100C95750 /* DrawingError.swift */,
 				2380581723AFDF0A00CA302E /* TouchType.swift */,
 				23E2B25F237207940067C048 /* Assets.xcassets */,
 				23E2B261237207940067C048 /* Main.storyboard */,
@@ -145,6 +148,7 @@
 				2380581623AFDEE900CA302E /* Drawing.swift in Sources */,
 				23E2B25E237207920067C048 /* ViewController.swift in Sources */,
 				23E2B25C237207920067C048 /* AppDelegate.swift in Sources */,
+				23C3036F23B03A3100C95750 /* DrawingError.swift in Sources */,
 				2380581823AFDF0A00CA302E /* TouchType.swift in Sources */,
 				2380581423AFDEC800CA302E /* Circle.swift in Sources */,
 			);

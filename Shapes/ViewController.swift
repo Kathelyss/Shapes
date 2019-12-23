@@ -28,18 +28,19 @@ class ViewController: NSViewController {
         drawingView.wantsLayer = true
         drawingView.layer?.borderColor = .black
         drawingView.layer?.borderWidth = 0.5
+        drawingView.delegate = self
     }
 
     func setupTextFields() {
-        firstCircleCenterXTextField.stringValue = "700"
-        firstCircleCenterYTextField.stringValue = "700"
-        firstCircleRadiusTextField.stringValue = "100"
+        firstCircleCenterXTextField.stringValue = "970"
+        firstCircleCenterYTextField.stringValue = "500"
+        firstCircleRadiusTextField.stringValue = "250"
 
         secondCircleCenterXTextField.stringValue = "350"
         secondCircleCenterYTextField.stringValue = "300"
-        secondCircleRadiusTextField.stringValue = "270"
+        secondCircleRadiusTextField.stringValue = "150"
 
-        arcRadiusTextField.stringValue = "100"
+        arcRadiusTextField.stringValue = "300"
     }
 
     @IBAction func createArcButtonTap(_ sender: NSButton) {
@@ -55,13 +56,22 @@ class ViewController: NSViewController {
 
         drawingView.isDrawing = true
         drawingView.setNeedsDisplay(drawingView.bounds)
-        arcTitleLabel.stringValue = "Касательная дуга"
-        arcCenterLabel.stringValue = "Центр дуги: (X, Y)"
-        touchPointsLabel.stringValue = "Точки касания:\nА (X, Y), В (X, Y)"
     }
 
     @IBAction func clearButtonTap(_ sender: NSButton) {
         drawingView.isDrawing = false
         drawingView.setNeedsDisplay(drawingView.bounds)
+        arcTitleLabel.stringValue = ""
+        arcCenterLabel.stringValue = ""
+        touchPointsLabel.stringValue = ""
+    }
+}
+
+extension ViewController: Calculatable {
+    func didCalculate(center: NSPoint, pointA: NSPoint, pointB: NSPoint) {
+        arcTitleLabel.stringValue = "Касательная дуга"
+        arcCenterLabel.stringValue = "Центр:\n(\(Int(center.x.rounded())), \(Int(center.y.rounded())))"
+        touchPointsLabel.stringValue =
+        "Точки касания:\nА (\(Int(pointA.x.rounded())), \(Int(pointA.y.rounded())))\nВ (\(Int(pointB.x.rounded())), \(Int(pointB.y.rounded())))"
     }
 }

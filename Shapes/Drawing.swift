@@ -1,11 +1,16 @@
 import Cocoa
 
+protocol Calculatable: AnyObject {
+    func didCalculate(center: NSPoint, pointA: NSPoint, pointB: NSPoint)
+}
+
 class Drawing: NSView {
     var firstCircle: Circle?
     var secondCircle: Circle?
     var arcRadius: Double?
 
     var isDrawing: Bool = false
+    weak var delegate: Calculatable?
 
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
@@ -19,20 +24,29 @@ class Drawing: NSView {
         draw(firstCircle, strokeColor: .black, lineWidth: 2)
         draw(secondCircle, strokeColor: .black, lineWidth: 2)
 
-        drawAssistantCircles(touchType: .outer)
+        do {
+            let arcCenter = try findAssistantCirclesIntersection()
+            drawAssistantCircles(touchType: .outer)
 
-        draw(findAssistantCirclesIntersection(), strokeColor: .systemGreen)
 
-        let thirdCircle = Circle(center: findAssistantCirclesIntersection(), radius: arcRadius)
-        let arcStartPoint = findTouchPoint(circle1: firstCircle, circle2: thirdCircle) // output
-        let arcEndPoint = findTouchPoint(circle1: secondCircle, circle2: thirdCircle) // output
-        draw(arcStartPoint, strokeColor: .systemGreen)
-        draw(arcEndPoint, strokeColor: .systemGreen)
-        drawArc(start: arcStartPoint,
-                end: arcEndPoint,
-                center: findAssistantCirclesIntersection(),
-                radius: arcRadius,
-                strokeColor: .systemGreen)
+            let thirdCircle = Circle(center: arcCenter, radius: arcRadius)
+            let arcStartPoint = findTouchPoint(circle1: firstCircle, circle2: thirdCircle)
+            let arcEndPoint = findTouchPoint(circle1: secondCircle, circle2: thirdCircle)
+
+            [firstCircle.center, secondCircle.center, arcCenter, arcStartPoint, arcEndPoint].forEach {
+                draw($0, strokeColor: .systemGreen)
+            }
+
+            drawArc(start: arcStartPoint,
+                    end: arcEndPoint,
+                    center: arcCenter,
+                    radius: arcRadius,
+                    strokeColor: .systemGreen)
+
+            delegate?.didCalculate(center: arcCenter, pointA: arcStartPoint, pointB: arcEndPoint)
+        } catch {
+            print("Error: \(error)")
+        }
     }
 
     func draw(_ point: NSPoint, strokeColor: NSColor) {
@@ -92,13 +106,18 @@ class Drawing: NSView {
 
     // MARK: - Calculations
 
-    func findAssistantCirclesIntersection() -> NSPoint {
+    func findAssistantCirclesIntersection() throws -> NSPoint {
         guard let firstCircle = firstCircle, let secondCircle = secondCircle, let arcRadius = arcRadius else {
             return .zero
         }
 
         let distanceBetweenCenters = Double(sqrt(pow(abs(secondCircle.center.x - firstCircle.center.x), 2) +
                                                  pow(abs(secondCircle.center.y - firstCircle.center.y), 2)))
+
+        guard distanceBetweenCenters > 0 else {
+            throw DrawingError.arcError
+        }
+
         let r1 = firstCircle.radius + arcRadius
         let r2 = secondCircle.radius + arcRadius
         let a = (pow(r1, 2) - pow(r2, 2) + pow(distanceBetweenCenters, 2)) / (2 * distanceBetweenCenters)
