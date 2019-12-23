@@ -70,8 +70,8 @@ class ViewController: NSViewController {
 extension ViewController: Calculatable {
     func didCalculate(center: NSPoint, pointA: NSPoint, pointB: NSPoint) {
         arcTitleLabel.stringValue = "Касательная дуга"
-        arcCenterLabel.stringValue = "Центр:\n(\(Int(center.x.rounded())), \(Int(center.y.rounded())))"
+        arcCenterLabel.stringValue = "Центр:\n(x: \(Int(center.x.rounded())), y: \(Int(center.y.rounded())))"
         touchPointsLabel.stringValue =
-        "Точки касания:\nА (\(Int(pointA.x.rounded())), \(Int(pointA.y.rounded())))\nВ (\(Int(pointB.x.rounded())), \(Int(pointB.y.rounded())))"
+        "Точки касания:\nА (x: \(Int(pointA.x.rounded())), y: \(Int(pointA.y.rounded())))\nВ (x: \(Int(pointB.x.rounded())), y: \(Int(pointB.y.rounded())))"
     }
 }

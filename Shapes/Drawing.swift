@@ -92,12 +92,8 @@ class Drawing: NSView {
             secondRadius = arcRadius + secondCircle.radius
 
         case .inner:
-            firstRadius = arcRadius - firstCircle.radius
-            secondRadius = arcRadius - secondCircle.radius
-
-        case .complex:
-            firstRadius = arcRadius + firstCircle.radius
-            secondRadius = arcRadius - secondCircle.radius
+            firstRadius = abs(arcRadius - firstCircle.radius)
+            secondRadius = abs(arcRadius - secondCircle.radius)
         }
 
         draw(Circle(center: firstCircle.center, radius: firstRadius), strokeColor: .systemGreen, lineWidth: 0.1)
@@ -133,10 +129,8 @@ class Drawing: NSView {
             return .zero
         }
 
-        let p3x = Double(firstCircle.center.x) + (a / d) * Double(secondCircle.center.x - firstCircle.center.x)
-        let p3y = Double(firstCircle.center.y) + (a / d) * Double(secondCircle.center.y - firstCircle.center.y)
-
-        return NSPoint(x: p3x, y: p3y)
+        return NSPoint(x: Double(firstCircle.center.x) + (a / d) * Double(secondCircle.center.x - firstCircle.center.x),
+                       y: Double(firstCircle.center.y) + (a / d) * Double(secondCircle.center.y - firstCircle.center.y))
     }
 
     func findArcCenter(h: Double, d: Double, p3: NSPoint) -> NSPoint {
@@ -144,10 +138,8 @@ class Drawing: NSView {
             return .zero
         }
 
-        let p4x = Double(p3.x) + (h / d) * Double(secondCircle.center.y - firstCircle.center.y)
-        let p4y = Double(p3.y) - (h / d) * Double(secondCircle.center.x - firstCircle.center.x)
-
-        return NSPoint(x: p4x, y: p4y)
+        return NSPoint(x: Double(p3.x) + (h / d) * Double(secondCircle.center.y - firstCircle.center.y),
+                       y: Double(p3.y) - (h / d) * Double(secondCircle.center.x - firstCircle.center.x))
     }
 
     func findTouchPoint(circle1: Circle, circle2: Circle) -> NSPoint {
