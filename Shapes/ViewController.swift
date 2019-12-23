@@ -32,13 +32,13 @@ class ViewController: NSViewController {
     }
 
     func setupTextFields() {
-        firstCircleCenterXTextField.stringValue = "970"
-        firstCircleCenterYTextField.stringValue = "500"
-        firstCircleRadiusTextField.stringValue = "250"
+        firstCircleCenterXTextField.stringValue = "300"
+        firstCircleCenterYTextField.stringValue = "300"
+        firstCircleRadiusTextField.stringValue = "150"
 
-        secondCircleCenterXTextField.stringValue = "350"
-        secondCircleCenterYTextField.stringValue = "300"
-        secondCircleRadiusTextField.stringValue = "150"
+        secondCircleCenterXTextField.stringValue = "900"
+        secondCircleCenterYTextField.stringValue = "500"
+        secondCircleRadiusTextField.stringValue = "250"
 
         arcRadiusTextField.stringValue = "300"
     }

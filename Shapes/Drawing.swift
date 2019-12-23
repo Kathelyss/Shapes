@@ -34,7 +34,7 @@ class Drawing: NSView {
             let arcEndPoint = findTouchPoint(circle1: secondCircle, circle2: thirdCircle)
 
             [firstCircle.center, secondCircle.center, arcCenter, arcStartPoint, arcEndPoint].forEach {
-                draw($0, strokeColor: .systemGreen)
+                draw($0, strokeColor: NSColor.systemGreen.withAlphaComponent(0.3))
             }
 
             drawArc(start: arcStartPoint,
